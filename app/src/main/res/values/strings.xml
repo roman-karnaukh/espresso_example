@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Espresso Example</string>
+    <string name="error">ERROR</string>
+</resources>
