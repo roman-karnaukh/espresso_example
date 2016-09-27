@@ -27,6 +27,8 @@ import org.hamcrest.TypeSafeMatcher;
 
 import java.util.ArrayList;
 
+import automation.qa.espressoexample.models.Person;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -128,8 +130,11 @@ public class Matchers {
         return viewHolder[0];
     }
 
+    public static Matcher<Root> isToast() {
+        return new Matchers.ToastMatcher();
+    }
 
-    public static class ToastMatcher extends TypeSafeMatcher<Root> {
+    static class ToastMatcher extends TypeSafeMatcher<Root> {
 
         @Override
         public void describeTo(Description description) {
@@ -143,8 +148,6 @@ public class Matchers {
                 IBinder windowToken = root.getDecorView().getWindowToken();
                 IBinder appToken = root.getDecorView().getApplicationWindowToken();
                 if (windowToken == appToken) {
-                    // windowToken == appToken means this window isn't contained by any other windows.
-                    // if it was a window for an activity, it would have TYPE_BASE_APPLICATION.
                     return true;
                 }
             }
@@ -181,6 +184,35 @@ public class Matchers {
             @Override
             public void describeTo(Description description) {
                 description.appendText("with InputLayout hint text: " + stringMatcher.toString());
+            }
+        };
+    }
+
+    public static Matcher<Object> withPersonName(final Matcher<String> personName) {
+        return new BoundedMatcher<Object, Person>(Person.class) {
+            @Override
+            protected boolean matchesSafely(Person item) {
+                return personName.matches(item.name);
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with Person Name: " + personName.toString());
+            }
+        };
+    }
+
+
+    public static Matcher<Object> withPersonAge(final Matcher<String> personAge) {
+        return new BoundedMatcher<Object, Person>(Person.class) {
+            @Override
+            protected boolean matchesSafely(Person item) {
+                return personAge.matches(item.age);
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with Person Age: " + personAge.toString());
             }
         };
     }
@@ -369,7 +401,7 @@ public class Matchers {
             @Override
             public void check(View view, NoMatchingViewException e){
                 boolean isLongClickable = view.isLongClickable();
-                assertFalse(isLongClickable);
+                assertTrue(isLongClickable);
             }
         };
     }

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="automation.qa.espressoexample">
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="24"
+        tools:node="merge" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TextInputLayoutActivity"></activity>
+        <activity android:name=".TextInputLayoutActivity" />
+        <activity android:name=".RecyclerViewActivity" />
+        <activity android:name=".ListViewActivity"></activity>
     </application>
 
 </manifest>

@@ -25,4 +25,20 @@
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RecyclerViewActivity"
+        android:id="@+id/btnRecyclerView"
+        android:layout_below="@+id/btnTextInputLayout"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ListViewActivity"
+        android:id="@+id/btnListViewActivity"
+        android:layout_below="@+id/btnRecyclerView"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
